@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for
 from models import db, User, Expense
 from datetime import datetime
+from sqlalchemy import desc
 
 dashboard_bp = Blueprint('dashboard', __name__)
 
@@ -30,7 +31,7 @@ def add_expense():
 @dashboard_bp.route('/expenses')
 def expenses():
     if 'user_id' in session:
-        expenses = Expense.query.filter_by(uid=session['user_id']).all()
+        expenses = Expense.query.filter_by(uid=session['user_id']).order_by(desc(Expense.date)).all()
         return render_template('expenses.html', expenses=expenses)
     return redirect(url_for('auth.login'))
 
