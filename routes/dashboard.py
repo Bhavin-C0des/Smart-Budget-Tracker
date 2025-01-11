@@ -68,9 +68,12 @@ def add_expense():
 @dashboard_bp.route('/expenses')
 def expenses():
     if 'user_id' in session:
+        uid = session['user_id']
         expenses_by_category = {}
-        expenses = Expense.query.filter_by(uid=session['user_id']).order_by(desc(Expense.date)).all()
+        expenses = Expense.query.filter_by(uid=uid).order_by(desc(Expense.date)).all()
+        print(expenses)
         expenses_by_category = get_expenses_by_category(expenses)
+        print(expenses_by_category)
         pie_chart_html = create_pie_chart(expenses_by_category)
         return render_template('expenses.html', expenses=expenses, expenses_by_category=expenses_by_category, pie_chart_html=pie_chart_html)
     return redirect(url_for('auth.login'))
