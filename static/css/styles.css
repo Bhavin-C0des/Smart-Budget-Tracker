@@ -41,7 +41,7 @@ h4{
     color: #021526;
     text-decoration: none;
     font-size: 20px;
-    margin: 20px, 20px;
+    margin: 30px 20px;
     padding: 10px 40px;
     border-radius: 40px;
     cursor: pointer;
@@ -87,6 +87,7 @@ h5{
     margin-top: 10px;
     margin-bottom: 10px;
     display: block;
+    max-width: 80%;
 }
 input, select{
     margin: 10px;
@@ -98,7 +99,7 @@ fieldset{
 }
 
 legend{
-    font-size: 20px;
+    font-size: 30px;
     font-family: 'Roboto';
 }
 
@@ -108,4 +109,31 @@ legend{
 
 .form-group{
    display: block;
+}
+
+.table-container{
+    padding: 20px;
+}
+
+.table {
+    width: 80%;
+    border-collapse: collapse;
+    border-style:solid;
+    margin: 0 auto;
+    font-size: 16px;
+    color: #6EACDA;
+}
+
+
+.table th {
+    background-color: #6EACDA;
+    color: #021526;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.table td {
+    padding: 10px 15px;
+    text-align: left; 
+    border: 2px solid #ccc;
 }

@@ -27,5 +27,12 @@ def add_expense():
         return render_template('add_expense.html')
     return redirect(url_for('auth.login'))
 
+@dashboard_bp.route('/expenses')
+def expenses():
+    if 'user_id' in session:
+        expenses = Expense.query.filter_by(uid=session['user_id']).all()
+        return render_template('expenses.html', expenses=expenses)
+    return redirect(url_for('auth.login'))
+
 
 

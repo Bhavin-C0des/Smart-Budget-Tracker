@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Expenses</h1>
+    <h3>Welcome to the expenses page, {{ session['username'] }}!</h3><br>
+    {% if expenses %}
+    <div class="table-container">
+        <table class="table">
+            <tr>
+                <th>Expense Title</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Date Added</th>
+            </tr>
+            {% for expense in expenses %}
+                <tr>
+                    <td>{{ expense['title'] }}</td>
+                    <td>{{ expense['amount'] }}</td>
+                    <td>{{ expense['category'] }}</td>
+                    <td>{{ expense['description'] }}</td>
+                    <td>{{ expense['date'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        </div>
+    {% else %}
+        <p>No expenses found. You can start by adding an expense.</p>
+    {% endif %}
+    <br><br><br>
+    <a href="{{ url_for('dashboard.add_expense') }}" class="btn">Add Expenses</a><br><br><br><br>
+    <a href="{{ url_for('dashboard.dashboard') }}" class="btn">Back to Dashboard</a><br
+{% endblock %}
