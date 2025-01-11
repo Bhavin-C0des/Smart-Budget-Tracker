@@ -6,6 +6,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from features.graphs import create_pie_chart
+from features.ocr import upload_bill
 
 
 dashboard_bp = Blueprint('dashboard', __name__)
@@ -28,18 +29,29 @@ def dashboard():
 
 @dashboard_bp.route('/add-expense', methods=['GET', 'POST'])
 def add_expense():
+    extracted_text = None
     if 'user_id' in session:
         if request.method == 'POST':
-            title = request.form['title']
-            amount = request.form['amount']
-            description = request.form['description']
-            uid = session['user_id']
-            print(uid)
-            category = request.form['category']
-            expense = Expense(title=title, amount=amount, description=description, uid=uid, category=category)
-            db.session.add(expense)
-            db.session.commit()
-            return redirect(url_for('dashboard.dashboard'))
+            action = request.form.get('action')
+
+            if action == 'add_expense':
+                title = request.form['title']
+                amount = request.form['amount']
+                description = request.form['description']
+                uid = session['user_id']
+                print(uid)
+                category = request.form['category']
+                expense = Expense(title=title, amount=amount, description=description, uid=uid, category=category)
+                db.session.add(expense)
+                db.session.commit()
+                return redirect(url_for('dashboard.dashboard'))
+            
+            elif action == 'upload_bill':
+                if 'bill_image' in request.files:
+                    file = request.files['bill_image']
+                    extracted_text = upload_bill(file)
+                    return render_template('add_expense.html', extracted_text=extracted_text)
+
         return render_template('add_expense.html')
     return redirect(url_for('auth.login'))
 
