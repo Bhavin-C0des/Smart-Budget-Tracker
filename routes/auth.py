@@ -22,6 +22,8 @@ def signup():
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    if 'user_id' in session:
+        return redirect(url_for('dashboard.dashboard'))
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -29,8 +31,14 @@ def login():
         if user and bcrypt.check_password_hash(user.password, password):
             session['user_id'] = user.id
             session['username'] = user.username
-            return f"Welcome {user.username}"
+            return redirect(url_for('dashboard.dashboard'))
         else:
             error = 'Invalid credentials'
             return render_template('login.html', error=error)
     return render_template('login.html')
+
+@auth_bp.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    session.pop('username', None)
+    return redirect(url_for('index'))
