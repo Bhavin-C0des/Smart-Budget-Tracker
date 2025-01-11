@@ -29,7 +29,7 @@ h3{
 }
 
 h4{
-    color: #6EACDA;
+    color: #021526;
     font: 'Roboto';
     font-size: 20px;
     text-align: center;
@@ -136,4 +136,15 @@ legend{
     padding: 10px 15px;
     text-align: left; 
     border: 2px solid #ccc;
+}
+
+.chart-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    text-align: center;
 }

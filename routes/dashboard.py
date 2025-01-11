@@ -2,6 +2,11 @@ from flask import Blueprint, render_template, request, session, redirect, url_fo
 from models import db, User, Expense
 from datetime import datetime
 from sqlalchemy import desc
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from features.graphs import create_pie_chart
+
 
 dashboard_bp = Blueprint('dashboard', __name__)
 
@@ -38,13 +43,14 @@ def add_expense():
         return render_template('add_expense.html')
     return redirect(url_for('auth.login'))
 
+
 @dashboard_bp.route('/expenses')
 def expenses():
     if 'user_id' in session:
         expenses = Expense.query.filter_by(uid=session['user_id']).order_by(desc(Expense.date)).all()
         expenses_by_category = get_expenses_by_category(expenses)
-        print(expenses_by_category)
-        return render_template('expenses.html', expenses=expenses, expenses_by_category=expenses_by_category)
+        pie_chart_html = create_pie_chart(expenses_by_category)
+        return render_template('expenses.html', expenses=expenses, expenses_by_category=expenses_by_category, pie_chart_html=pie_chart_html)
     return redirect(url_for('auth.login'))
 
 
