@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session
-from models.models import db, User
+from models import db, User, Expense
 from routes import register_blueprints
 import os
 import dotenv
