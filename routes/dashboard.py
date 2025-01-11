@@ -7,6 +7,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from features.graphs import create_pie_chart
 from features.ocr import upload_bill
+from features.bill_analysis import analyse_bill
 
 
 dashboard_bp = Blueprint('dashboard', __name__)
@@ -39,18 +40,26 @@ def add_expense():
                 amount = request.form['amount']
                 description = request.form['description']
                 uid = session['user_id']
-                print(uid)
                 category = request.form['category']
                 expense = Expense(title=title, amount=amount, description=description, uid=uid, category=category)
                 db.session.add(expense)
                 db.session.commit()
-                return redirect(url_for('dashboard.dashboard'))
-            
+                           
             elif action == 'upload_bill':
                 if 'bill_image' in request.files:
                     file = request.files['bill_image']
                     extracted_text = upload_bill(file)
-                    return render_template('add_expense.html', extracted_text=extracted_text)
+                    result = analyse_bill(extracted_text)
+                    title = result['title']
+                    amount = result['amount']
+                    amount = amount.replace(',', '')
+                    description = result['description']
+                    category = result['category']
+                    uid = session['user_id']
+                    expense=Expense(title=title, amount=amount, description=description, uid=uid, category=category)
+                    db.session.add(expense)
+                    db.session.commit()
+
 
         return render_template('add_expense.html')
     return redirect(url_for('auth.login'))
