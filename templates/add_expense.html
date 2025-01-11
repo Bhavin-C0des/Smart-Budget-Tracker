@@ -42,13 +42,7 @@
         <input type="file" name="bill_image" accept="image/*" required>
         <button type="submit" name="action" value="upload_bill" class="btn btn-secondary">Upload Bill</button>
     </fieldset>
-</form>
-
-{% if extracted_text %}
-    <h2>Extracted Text From Uploaded Image :</h2>
-    <pre style="color: #6EACDA">{{extracted_text}}</pre>
-{% else %}
-    <h3>No text extracted yet. Please upload the bill image.</h3>
-{% endif %}
-
+</form><br><br>
+<a href="{{ url_for('dashboard.expenses') }}" class="btn">View Expenses</a><br><br><br><br>
+<a href="{{ url_for('dashboard.dashboard') }}" class="btn">Back to Dashboard</a>
 {% endblock %}
