@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>Add Expenses</h1>
-<<form class="add_expense" method="POST" enctype="multipart/form-data">
+<form class="add_expense" method="POST" enctype="multipart/form-data">
     <fieldset>
         <legend>Text Input</legend>
         <div class="form-group">
@@ -30,9 +30,10 @@
                 <option value="Shopping">Shopping</option>
                 <option value="Other">Other</option>
             </select>
+            <br>
+            <button type="submit" name="action" value="add_expense" class="btn btn-primary">Add Expense</button>
         </div>
     </fieldset>
-    <button type="submit" name="action" value="add_expense" class="btn btn-primary">Add Expense</button>
 </form>
 
 <form method="POST" enctype="multipart/form-data">

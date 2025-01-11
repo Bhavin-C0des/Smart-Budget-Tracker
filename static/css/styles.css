@@ -101,9 +101,19 @@ input, select{
 }
 
 fieldset{
+    border-bottom: 1px solid white;
     border-left: none;
     border-right: none;
+    border-top:none;
 }
+
+.add_expense{
+    border-top: 1px solid white;
+    padding-top: 30px;
+    max-width: 100%;
+}
+
+
 
 legend{
     font-size: 30px;
