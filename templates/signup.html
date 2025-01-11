@@ -3,15 +3,15 @@
 {% block content %}
 <h1>Sign Up Page</h1>
 <form method="POST">
-    <label for="username">Creat a Username:</label>
-    <input type="text" name="username" placeholder="Username..." required><br>
-    <label for="password">Create a Password:</label>
-    <input type="password" name="password" placeholder="Password"><br>
-    <input type="submit" value="Sign Up">
+    <label for="username" class="form-label">Username:</label>
+    <input type="text" id="username" name="username" placeholder="Enter a username" required class="textbox"><br>
+
+    <label for="password" class="form-label">Password:</label>
+    <input type="password" id="password" name="password" placeholder="Enter a password" required class="textbox"><br>
+    
+    <input type="submit" value="Sign Up" class="btn btn-primary">
 </form>
-{% if error %}
-    <p>{{ error }}</p>
-{% endif %}
-<h4>Already have an account? <a href="/login">Login Here</a></h4>
-<a href="/"><button>Back to Home</button></a>
+<p class="error">{{error}}<p>
+<h4>Already have an account? <a href="{{ url_for('auth.login') }}">Log In Here</a></h4>
+<a href="{{ url_for('index') }}"><button class="btn btn-primary">Back to Home</button></a>
 {% endblock %}

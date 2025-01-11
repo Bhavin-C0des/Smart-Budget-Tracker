@@ -3,15 +3,14 @@
 {% block content %}
 <h1>Log In Page</h1>
 <form method="POST">
-    <label for="username">Username:</label>
-    <input type="text" name="username" placeholder="Username" required><br>
-    <label for="password">Password:</label>
-    <input type="password" name="password" placeholder="Password"><br>
-    <input type="submit" value="Log In">
+    <label for="username" class="form-label">Username:</label>
+    <input type="text" name="username" placeholder="Username" required class="textbox"><br>
+    <label for="password" class="form-label">Password:</label>
+    <input type="password" name="password" placeholder="Password" required class="textbox"><br>
+    <input type="submit" value="Log In" class="btn btn-primary">
 </form>
-{% if error %}
-    <p>{{ error }}</p>
-{% endif %}
+<p class="error">{{error}}</p>
 <h4>Don't have an account? <a href="/signup">Sign Up Here</a></h4>
-<a href="/">Back to Home</button></a>
+<a href="/"><button class="btn btn-primary">Back to Home</button></a>
 {% endblock %}
+
