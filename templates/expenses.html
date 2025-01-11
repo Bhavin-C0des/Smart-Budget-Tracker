@@ -3,6 +3,7 @@
 {% block content %}
     <h1>Expenses</h1>
     <h3>Welcome to the expenses page, {{ session['username'] }}!</h3><br>
+    <h2>{{expenses_by_category}}</h2>
     {% if expenses %}
     <div class="table-container">
         <table class="table">

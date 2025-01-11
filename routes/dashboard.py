@@ -5,6 +5,16 @@ from sqlalchemy import desc
 
 dashboard_bp = Blueprint('dashboard', __name__)
 
+expenses_by_category = {}
+
+def get_expenses_by_category(expenses):
+    for expense in expenses:
+        if expense.category in expenses_by_category:
+            expenses_by_category[expense.category] += expense.amount
+        else:
+            expenses_by_category[expense.category] = expense.amount
+    return expenses_by_category
+
 @dashboard_bp.route('/dashboard')
 def dashboard():
     if 'user_id' in session:
@@ -32,8 +42,9 @@ def add_expense():
 def expenses():
     if 'user_id' in session:
         expenses = Expense.query.filter_by(uid=session['user_id']).order_by(desc(Expense.date)).all()
-        return render_template('expenses.html', expenses=expenses)
+        expenses_by_category = get_expenses_by_category(expenses)
+        print(expenses_by_category)
+        return render_template('expenses.html', expenses=expenses, expenses_by_category=expenses_by_category)
     return redirect(url_for('auth.login'))
-
 
 
