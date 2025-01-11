@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import date
 
 db = SQLAlchemy()
 
@@ -15,5 +16,5 @@ class Expense(db.Model):
     title = db.Column(db.String(80), nullable=False)
     description = db.Column(db.String(80), nullable=False)
     category = db.Column(db.String(80), nullable=False)
-    date = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.Date, nullable=False, default=date.today)
     

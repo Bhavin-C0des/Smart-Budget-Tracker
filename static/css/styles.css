@@ -41,7 +41,7 @@ h4{
     color: #021526;
     text-decoration: none;
     font-size: 20px;
-    margin: 20px;
+    margin: 20px, 20px;
     padding: 10px 40px;
     border-radius: 40px;
     cursor: pointer;
@@ -79,4 +79,33 @@ h5{
     font-size: 20px;
     text-align: center;
     margin: 20px;
+}
+
+.add_expense{
+    color: #6EACDA;
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+}
+input, select{
+    margin: 10px;
+}
+
+fieldset{
+    border-left: none;
+    border-right: none;
+}
+
+legend{
+    font-size: 20px;
+    font-family: 'Roboto';
+}
+
+.logout-btn{
+    margin-bottom: 20px;
+}
+
+.form-group{
+   display: block;
 }

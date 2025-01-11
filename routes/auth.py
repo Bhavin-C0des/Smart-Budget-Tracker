@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for
 from flask_bcrypt import Bcrypt
-from models.models import db, User
+from models import db, User
 
 auth_bp = Blueprint('auth', __name__)
 bcrypt = Bcrypt()

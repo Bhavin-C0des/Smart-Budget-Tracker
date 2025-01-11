@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Add Expenses</h1>
+<form class="add_expense" method="POST">
+    <fieldset class>
+    <legend>Text Input</legend>
+    <div class="form-group">
+        <label for="expense">Title</label>
+        <input type="text" class="form-control" id="title" name="title" required>
+    </div>
+    <div class="form-group">
+        <label for="expense">Amount:</label>
+        <input type="number" class="form-control" id="amount" name="amount" required>
+    </div>
+    <div class="form-group">
+        <label for="amount">Description:</label>
+        <textarea class="form-control" id="description" name="description" required placeholder="Provide a short description here..."></textarea>
+    </div>
+    <div class="form-group">
+        <label for="category">Category:</label>
+        <select class="category" name="category" required>
+            <option value="">(select one)</option>
+            <option value="Groceries/Essentials">Groceries/Essentials</option>
+            <option value="Housing">Housing</option>
+            <option value="Transport">Transport</option>
+            <option value="Dine-Outs">Dine-Outs</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Health & Fitness">Health & Fitness</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Add</button>
+    
+</form>
+{% endblock %}
