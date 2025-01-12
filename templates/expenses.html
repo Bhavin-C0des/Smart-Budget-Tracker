@@ -5,7 +5,7 @@
     <h3>Welcome to the expenses page, {{ session['username'] }}!</h3><br>
     {% if expenses %}
     <div class="chart-container">
-        <h4>Your expenses by category</h4>
+        <h4 style="color: #021526">Your expenses by category</h4>
         {{ pie_chart_html | safe }}
     </div>
 
@@ -30,9 +30,9 @@
         </table>
         </div>
     {% else %}
-        <p>No expenses found. You can start by adding an expense.</p>
+        <p style="color: #fff">No expenses found. You can start by adding an expense.</p>
     {% endif %}
     <br><br><br>
     <a href="{{ url_for('dashboard.add_expense') }}" class="btn">Add Expenses</a><br><br><br><br>
-    <a href="{{ url_for('dashboard.dashboard') }}" class="btn">Back to Dashboard</a><br
+    <a href="{{ url_for('dashboard.dashboard') }}" class="btn">Back to Dashboard</a><br><br>
 {% endblock %}

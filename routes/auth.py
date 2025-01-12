@@ -10,11 +10,12 @@ def signup():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        monthly_income = request.form['monthly_income']
         if User.query.filter_by(username=username).first():
             error = 'Username already exists!'
             return render_template('signup.html', error=error)
         else:
-            user = User(username=username, password=bcrypt.generate_password_hash(password).decode('utf-8'))
+            user = User(username=username, password=bcrypt.generate_password_hash(password).decode('utf-8'), monthly_income=monthly_income)
             db.session.add(user)
             db.session.commit()
             return redirect(url_for('auth.login'))

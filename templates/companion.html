@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Our Smart AI companion!</h1>
+<p class="description">Ask any related queries to our smart AI companion:</p>
+<form action="{{ url_for('dashboard.companion') }}" method="POST">
+    <textarea id="query" name="query" rows="4" cols="50" placeholder="Type here...">{{ question or '' }}</textarea><br>
+    <button class='submit_query_AI' type="submit">Ask</button>
+</form>
+
+{% if answer %}
+  <h3>AI's Answer:</h3>
+  <p style="color: #fff; font-size: 20px;">{{ answer }}</p>
+{% endif %}
+
+{% endblock %}

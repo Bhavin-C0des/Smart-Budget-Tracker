@@ -8,6 +8,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from features.graphs import create_pie_chart
 from features.ocr import upload_bill
 from features.bill_analysis import analyse_bill
+from features.recommendations import generate_recommendations
+from features.companion import ask_companion
 
 
 dashboard_bp = Blueprint('dashboard', __name__)
@@ -27,6 +29,24 @@ def dashboard():
     if 'user_id' in session:
         return render_template('dashboard.html')
     return redirect(url_for('auth.login'))
+
+@dashboard_bp.route('/suggestions', methods=['GET', 'POST'])
+def suggestions():
+    if 'user_id' in session:
+        uid = session['user_id']
+        user = User.query.filter_by(id=uid).first()
+
+        expenses = Expense.query.filter_by(uid=uid).all()
+
+        expenses_by_category = get_expenses_by_category(expenses)
+
+        income = user.monthly_income
+
+        suggestions = generate_recommendations(expenses_by_category, income)
+        
+        return render_template('suggestions.html', suggestions=suggestions)
+    return redirect(url_for('auth.login'))
+
 
 @dashboard_bp.route('/add-expense', methods=['GET', 'POST'])
 def add_expense():
@@ -78,4 +98,13 @@ def expenses():
         return render_template('expenses.html', expenses=expenses, expenses_by_category=expenses_by_category, pie_chart_html=pie_chart_html)
     return redirect(url_for('auth.login'))
 
-
+@dashboard_bp.route('/companion', methods=['GET', 'POST'])
+def companion():
+    if 'user_id' in session:
+        if request.method == 'POST':
+            question = request.form['query']
+            # You should call a function to get the AI's answer based on the question
+            answer = ask_companion(question)  # This function should return the AI response
+            return render_template('companion.html', answer=answer, question=question)
+        return render_template('companion.html')
+    return redirect(url_for('auth.login'))

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %} 
+<h1>Your Spending Suggestions</h1>
+
+<ul>
+    {% for suggestion in suggestions %}
+        <li style="color:white; font-size:20px;">{{ suggestion }}</li>
+    {% endfor %}
+</ul>
+</body>
+{% endblock %}
